@@ -1,0 +1,102 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            font-family: 'serif';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        #terminal {
+            width: 80%;
+            max-width: 600px;
+            padding: 40px;
+            border: 1px solid #333;
+            background: rgba(20, 20, 20, 0.8);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border-radius: 8px;
+        }
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            background-color: #d4af37;
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        h1 { color: #d4af37; font-style: italic; font-weight: normal; }
+        p { line-height: 1.8; font-size: 1.1rem; white-space: pre-wrap; }
+        button {
+            background: none;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+        button:hover { background: #d4af37; color: #000; }
+    </style>
+</head>
+<body>
+
+    <div id="terminal">
+        <div id="setup">
+            <h1>Authorized Access Required</h1>
+            <p>Please enter the secret key to continue...</p>
+            <input type="password" id="pass" style="background:#222; color:#fff; border:1px solid #444; padding:5px;">
+            <button onclick="checkPass()">Unlock</button>
+        </div>
+        
+        <div id="message" style="display:none;">
+            <h1 id="title"></h1>
+            <p id="text"></p>
+            <span class="cursor">&nbsp;</span>
+        </div>
+    </div>
+
+    <script>
+        const secret = "sayang"; // YOU CAN CHANGE THIS PASSWORD
+        const longText = `Happy Birthday to the most incredible woman I know... 
+
+Happy Birthday to the most incredible woman yang orang palingg sayangg. Orang doakan baby orang selalu dipermudahkan segala urusan, dimurahkan rezeki yang melimpah ruah, sentiasa didekati dengan orang yang baik baikk. 
+Alhamdullilah, baby orangg dahh masuk 21 daaa. Nak masuk kejee daa baby orangg. Ingat lagi orang masa kita mula mulaa kenal duluu. Tak expect pun orang still together dengan someone yang orang kenal mase tahun 2023. 
+It been a journey with you sayangg. Banyak moment yang kita create together babyyy even kita jarang gilaa dating. Orang akan selaluuu cherish that moment sampaii bilaa bilaaa. 
+Orang minta maaf sebb orang tak dapat sambut birthday together dengan baby. Im so sorry sayangg. Should orang datang je palam. As today is your birthday, YOUU SHOULDDD HAPPYYY BABYYYYYYY!!!!!!! 
+Im really proud of you sayangg. Sayang, thank you for choosing me as your partner until now. Thank you for choosing me everday day, for your patient layan orang, and the way that sayang make me better version of 
+myself. Orang berdoaa agar kita dapat kawin together, having a small family together in the future. I am really love you, Khayrina Ardini.
+
+I love you more than words can show.`;
+
+        function checkPass() {
+            const input = document.getElementById('pass').value;
+            if(input.toLowerCase() === secret) {
+                document.getElementById('setup').style.display = 'none';
+                document.getElementById('message').style.display = 'block';
+                typeWriter();
+            } else {
+                alert("Access Denied. Hint: What do I call you?");
+            }
+        }
+
+        let i = 0;
+        function typeWriter() {
+            if (i < longText.length) {
+                document.getElementById("text").innerHTML += longText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50); // Speed of typing
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+        }
+    </script>
+</body>
+</html>
